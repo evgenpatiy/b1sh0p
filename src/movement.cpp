@@ -3,45 +3,50 @@
 #include <movement.h>
 #include <led.h>
 
-const Motor leftMotor = Motor{LEFT_MOTOR_FORWARD, LEFT_MOTOR_BACKWARD};
-const Motor rightMotor = Motor{RIGHT_MOTOR_FORWARD, RIGHT_MOTOR_BACKWARD};
+Motor leftEngine = Motor(LEFT_MOTOR_FORWARD, LEFT_MOTOR_BACKWARD);
+Motor rightEngine = Motor(RIGHT_MOTOR_FORWARD, RIGHT_MOTOR_BACKWARD);
 
-void initMotor(Motor motor)
+Motor::Motor(int _forward, int _backward)
 {
-    pinMode(motor.forward, OUTPUT);
-    pinMode(motor.backward, OUTPUT);
+    forward = _forward;
+    backward = _backward;
 }
 
-void motorForward(Motor motor)
+void Motor::init()
 {
-    digitalWrite(motor.forward, HIGH);
-    digitalWrite(motor.backward, LOW);
+    pinMode(forward, OUTPUT);
+    pinMode(backward, OUTPUT);
 }
 
-void motorBackward(Motor motor)
+void Motor::moveForward()
 {
-    digitalWrite(motor.forward, LOW);
-    digitalWrite(motor.backward, HIGH);
+    digitalWrite(forward, HIGH);
+    digitalWrite(backward, LOW);
 }
 
-void stopMotor(Motor motor)
+void Motor::moveBackward()
 {
-    digitalWrite(motor.forward, LOW);
-    digitalWrite(motor.backward, LOW);
+    digitalWrite(forward, LOW);
+    digitalWrite(backward, HIGH);
+}
+
+void Motor::stop()
+{
+    digitalWrite(forward, LOW);
+    digitalWrite(backward, LOW);
 }
 
 void initMotors()
 {
-    initMotor(leftMotor);
-    initMotor(rightMotor);
+    leftEngine.init();
+    rightEngine.init();
 }
 
 void stop()
 {
-   //stopTimer();
-
-    stopMotor(leftMotor);
-    stopMotor(rightMotor);
+    // stopTimer();
+    leftEngine.stop();
+    rightEngine.stop();
 }
 
 void execute(unsigned int time)
@@ -57,29 +62,29 @@ void moveForward(unsigned int time)
 {
     startTimer();
 
-    motorForward(leftMotor);
-    motorForward(rightMotor);
+    leftEngine.moveForward();
+    rightEngine.moveForward();
     execute(time);
 }
 
 void moveBackward(unsigned int time)
 {
-    motorBackward(leftMotor);
-    motorBackward(rightMotor);
+    leftEngine.moveBackward();
+    rightEngine.moveBackward();
     execute(time);
 }
 
 void turnLeft(unsigned int time)
 {
-    motorBackward(leftMotor);
-    motorForward(rightMotor);
+    leftEngine.moveBackward();
+    rightEngine.moveForward();
     execute(time);
 }
 
 void turnRight(unsigned int time)
 {
-    motorForward(leftMotor);
-    motorBackward(rightMotor);
+    leftEngine.moveForward();
+    rightEngine.moveBackward();
     execute(time);
 }
 

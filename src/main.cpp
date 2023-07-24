@@ -51,7 +51,21 @@ void loop()
     if (distance <= CRITICAL_DISTANCE)
     {
       stop();
-      moveBackward(400);
+
+      switch (random(0, 3))
+      {
+      case 0:
+        moveBackward(400);
+        break;
+      case 1:
+        turnOverRight();
+        break;
+      case 2:
+        turnOverLeft();
+        break;
+      default:
+        break;
+      }
 
       int distanceRight = readDistanceByAngle(SERVO_RIGHT_POSITION);
       resetServoPosition();
@@ -94,7 +108,7 @@ void loop()
           break;
         }
       }
-      else if (distanceLeft >= distanceRight)
+      else if (distanceLeft > distanceRight)
       {
         switch (random(0, 4))
         {
@@ -121,4 +135,3 @@ void loop()
     }
   }
 }
-
