@@ -13,7 +13,7 @@
   Serial
 
 const char *ROBOT_NAME = {"B1sh0p"};
-const float ROBOT_SOFTWARE_VERSION = 0.03;
+const float ROBOT_SOFTWARE_VERSION = 0.04;
 
 unsigned long operatedTime = 0;
 
@@ -53,6 +53,20 @@ void loop()
     if (distance <= CRITICAL_DISTANCE)
     {
       stop();
+      switch (random(0, 3))
+        {
+        case 0:
+          turnOverLeft();
+          break;
+        case 1:
+          turnOverRight();
+          break;
+        case 2:
+          moveBackward(400);
+          break;
+        default:
+          break;
+        }
 
       int distanceRight = readDistanceByAngle(SERVO_RIGHT_POSITION);
       resetServoPosition();
@@ -63,6 +77,7 @@ void loop()
 
       if (distanceRight <= CRITICAL_DISTANCE && distanceLeft <= CRITICAL_DISTANCE)
       {
+        moveBackward(500);
         switch (random(0, 3))
         {
         case 0:
