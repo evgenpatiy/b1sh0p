@@ -95,7 +95,7 @@ void loop()
           break;
         }
       }
-      else if (distanceLeft > distanceRight)
+      else if (distanceLeft >= distanceRight)
       {
         switch (random(0, 3))
         {
@@ -107,6 +107,21 @@ void loop()
           break;
         case 2:
           turnLeftToAngle(90);
+          break;
+        default:
+          break;
+        }
+      } else {
+         switch (random(0, 3))
+        {
+        case 0:
+          turnOverLeft();
+          break;
+        case 1:
+          turnOverRight();
+          break;
+        case 2:
+          moveBackward(500);
           break;
         default:
           break;
