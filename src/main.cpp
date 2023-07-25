@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include <movement.h>
 #include <led.h>
-#include <timer.h>
 #include <turnservo.h>
 #include <ultrasonic.h>
 
@@ -16,7 +15,7 @@
 const char *ROBOT_NAME = {"B1sh0p"};
 const float ROBOT_SOFTWARE_VERSION = 0.03;
 
-unsigned int distance = 100;
+unsigned long operatedTime = 0;
 
 void initSerialConsole()
 {
@@ -30,7 +29,6 @@ void initSerialConsole()
 void setup()
 {
   initSerialConsole();
-  initTimers();
   initMotors();
   initLedLights();
   initServo();
@@ -40,15 +38,17 @@ void setup()
 
 void loop()
 {
-  if (isTimerReady())
-  {
-    blinkNavigationLights();
-  }
-
   if (RUN_LOOP)
   {
-    delay(ULTRASONIC_DELAY);
-    distance = readDistanceAhead();
+    unsigned long currentTime = millis();
+    if (currentTime - operatedTime >= 1000)
+    {
+      operatedTime = currentTime;
+      blinkNavigationLights();
+    }
+
+    delay(SONAR_DELAY);
+    unsigned int distance = readDistanceAhead();
 
     if (distance <= CRITICAL_DISTANCE)
     {
@@ -73,7 +73,7 @@ void loop()
           break;
         case 2:
           moveBackward(400);
-          break;  
+          break;
         default:
           break;
         }
@@ -83,10 +83,10 @@ void loop()
         switch (random(0, 3))
         {
         case 0:
-          turnRightToAngle(45);
+          turnRightToAngle(90);
           break;
         case 1:
-          turnRightToAngle(60);
+          turnRightToAngle(90);
           break;
         case 2:
           turnRightToAngle(90);
@@ -100,10 +100,10 @@ void loop()
         switch (random(0, 3))
         {
         case 0:
-          turnLeftToAngle(45);
+          turnLeftToAngle(90);
           break;
         case 1:
-          turnLeftToAngle(60);
+          turnLeftToAngle(90);
           break;
         case 2:
           turnLeftToAngle(90);
@@ -111,8 +111,10 @@ void loop()
         default:
           break;
         }
-      } else {
-         switch (random(0, 3))
+      }
+      else
+      {
+        switch (random(0, 3))
         {
         case 0:
           turnOverLeft();
