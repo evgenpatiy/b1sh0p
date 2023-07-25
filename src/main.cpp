@@ -101,10 +101,10 @@ void loop()
           turnRightToAngle(90);
           break;
         case 1:
-          turnRightToAngle(90);
+          turnRightToAngle(120);
           break;
         case 2:
-          turnRightToAngle(90);
+          turnRightToAngle(150);
           break;
         default:
           break;
@@ -118,10 +118,10 @@ void loop()
           turnLeftToAngle(90);
           break;
         case 1:
-          turnLeftToAngle(90);
+          turnLeftToAngle(120);
           break;
         case 2:
-          turnLeftToAngle(90);
+          turnLeftToAngle(150);
           break;
         default:
           break;
