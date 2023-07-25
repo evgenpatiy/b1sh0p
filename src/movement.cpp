@@ -1,13 +1,12 @@
 #include <Arduino.h>
-#include <timer.h>
 #include <movement.h>
 #include <led.h>
 
 class Motor
 {
 private:
-    int forward;
-    int backward;
+    int forward_pin;
+    int backward_pin;
 
 public:
     Motor(int _forward, int _backward);
@@ -23,32 +22,32 @@ Motor rightEngine = Motor(RIGHT_MOTOR_FORWARD, RIGHT_MOTOR_BACKWARD);
 
 Motor::Motor(int _forward, int _backward)
 {
-    forward = _forward;
-    backward = _backward;
+    forward_pin = _forward;
+    backward_pin = _backward;
 }
 
 void Motor::init()
 {
-    pinMode(forward, OUTPUT);
-    pinMode(backward, OUTPUT);
+    pinMode(forward_pin, OUTPUT);
+    pinMode(backward_pin, OUTPUT);
 }
 
 void Motor::moveForward()
 {
-    digitalWrite(forward, HIGH);
-    digitalWrite(backward, LOW);
+    digitalWrite(forward_pin, HIGH);
+    digitalWrite(backward_pin, LOW);
 }
 
 void Motor::moveBackward()
 {
-    digitalWrite(forward, LOW);
-    digitalWrite(backward, HIGH);
+    digitalWrite(forward_pin, LOW);
+    digitalWrite(backward_pin, HIGH);
 }
 
 void Motor::stop()
 {
-    digitalWrite(forward, LOW);
-    digitalWrite(backward, LOW);
+    digitalWrite(forward_pin, LOW);
+    digitalWrite(backward_pin, LOW);
 }
 
 void initMotors()
@@ -59,7 +58,6 @@ void initMotors()
 
 void stop()
 {
-    // stopTimer();
     leftEngine.stop();
     rightEngine.stop();
 }
@@ -75,8 +73,6 @@ void execute(unsigned int time)
 
 void moveForward(unsigned int time)
 {
-    startTimer();
-
     leftEngine.moveForward();
     rightEngine.moveForward();
     execute(time);
