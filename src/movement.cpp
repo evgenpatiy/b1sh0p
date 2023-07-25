@@ -3,6 +3,21 @@
 #include <movement.h>
 #include <led.h>
 
+class Motor
+{
+private:
+    int forward;
+    int backward;
+
+public:
+    Motor(int _forward, int _backward);
+
+    void init();
+    void moveForward();
+    void moveBackward();
+    void stop();
+};
+
 Motor leftEngine = Motor(LEFT_MOTOR_FORWARD, LEFT_MOTOR_BACKWARD);
 Motor rightEngine = Motor(RIGHT_MOTOR_FORWARD, RIGHT_MOTOR_BACKWARD);
 

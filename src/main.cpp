@@ -34,38 +34,25 @@ void setup()
   initMotors();
   initLedLights();
   initServo();
+
+  turnWarningLights();
 }
 
 void loop()
 {
+  if (isTimerReady())
+  {
+    blinkNavigationLights();
+  }
+
   if (RUN_LOOP)
   {
-    if (isTimerReady())
-    {
-      blinkNavigationLights();
-    }
-
     delay(ULTRASONIC_DELAY);
     distance = readDistanceAhead();
 
     if (distance <= CRITICAL_DISTANCE)
     {
       stop();
-
-      switch (random(0, 3))
-      {
-      case 0:
-        moveBackward(400);
-        break;
-      case 1:
-        turnOverRight();
-        break;
-      case 2:
-        turnOverLeft();
-        break;
-      default:
-        break;
-      }
 
       int distanceRight = readDistanceByAngle(SERVO_RIGHT_POSITION);
       resetServoPosition();
@@ -76,7 +63,7 @@ void loop()
 
       if (distanceRight <= CRITICAL_DISTANCE && distanceLeft <= CRITICAL_DISTANCE)
       {
-        switch (random(0, 2))
+        switch (random(0, 3))
         {
         case 0:
           turnOverLeft();
@@ -84,13 +71,16 @@ void loop()
         case 1:
           turnOverRight();
           break;
+        case 2:
+          moveBackward(400);
+          break;  
         default:
           break;
         }
       }
       else if (distanceRight >= distanceLeft)
       {
-        switch (random(0, 4))
+        switch (random(0, 3))
         {
         case 0:
           turnRightToAngle(45);
@@ -101,16 +91,13 @@ void loop()
         case 2:
           turnRightToAngle(90);
           break;
-        case 3:
-          turnOverRight();
-          break;
         default:
           break;
         }
       }
       else if (distanceLeft > distanceRight)
       {
-        switch (random(0, 4))
+        switch (random(0, 3))
         {
         case 0:
           turnLeftToAngle(45);
@@ -120,9 +107,6 @@ void loop()
           break;
         case 2:
           turnLeftToAngle(90);
-          break;
-        case 3:
-          turnOverLeft();
           break;
         default:
           break;

@@ -5,21 +5,6 @@
 
 #define FULL_TURNOVER_TIME 500UL
 
-class Motor
-{
-  private:
-    int forward;
-    int backward;
-
-  public:
-    Motor(int _forward,int _backward); 
-
-    void init();
-    void moveForward();
-    void moveBackward();
-    void stop();
-};
-
 void initMotors();
 
 void stop();

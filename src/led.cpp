@@ -1,52 +1,78 @@
 #include <Arduino.h>
 #include <led.h>
 
-LedLight leftLight = {LEFT_LED_RED, LEFT_LED_GREEN, LEFT_LED_BLUE};
-LedLight rightLight = {RIGHT_LED_RED, RIGHT_LED_GREEN, RIGHT_LED_BLUE};
-
-LedColor red = {255, 0, 0};
-LedColor green = {0, 255, 0};
-LedColor blue = {0, 0, 255};
-LedColor yellow = {255, 255, 0};
-LedColor white = {255, 255, 255};
-
-void initLED(LedLight light)
+struct LedColor
 {
-    pinMode(light.r, OUTPUT);
-    pinMode(light.g, OUTPUT);
-    pinMode(light.b, OUTPUT);
+    unsigned char rLevel;
+    unsigned char gLevel;
+    unsigned char bLevel;
+};
+
+class LedLight
+{
+private:
+    unsigned char r_pin;
+    unsigned char g_pin;
+    unsigned char b_pin;
+
+public:
+    LedLight(unsigned char _r, unsigned char _g, unsigned char _b);
+
+    void init();
+    void on(LedColor color);
+    void off();
+};
+
+LedLight::LedLight(unsigned char _r, unsigned char _g, unsigned char _b)
+{
+    r_pin = _r;
+    g_pin = _g;
+    b_pin = _b;
 }
+
+void LedLight::init()
+{
+    pinMode(r_pin, OUTPUT);
+    pinMode(g_pin, OUTPUT);
+    pinMode(b_pin, OUTPUT);
+}
+
+void LedLight::on(LedColor color)
+{
+    analogWrite(r_pin, color.rLevel);
+    analogWrite(g_pin, color.gLevel);
+    analogWrite(b_pin, color.bLevel);
+}
+
+void LedLight::off()
+{
+    digitalWrite(r_pin, LOW);
+    digitalWrite(g_pin, LOW);
+    digitalWrite(b_pin, LOW);
+}
+
+LedLight leftLight = LedLight(LEFT_LED_RED, LEFT_LED_GREEN, LEFT_LED_BLUE);
+LedLight rightLight = LedLight(RIGHT_LED_RED, RIGHT_LED_GREEN, RIGHT_LED_BLUE);
 
 void initLedLights()
 {
-    initLED(leftLight);
-    initLED(rightLight);
-}
-
-void lightOn(LedLight light, LedColor color)
-{
-    analogWrite(light.r, color.rLevel);
-    analogWrite(light.g, color.gLevel);
-    analogWrite(light.b, color.bLevel);
-}
-
-void lightOff(LedLight light)
-{
-    digitalWrite(light.r, LOW);
-    digitalWrite(light.g, LOW);
-    digitalWrite(light.b, LOW);
+    leftLight.init();
+    rightLight.init();
 }
 
 void forwardLightsOn()
 {
-    lightOn(leftLight, red);
-    lightOn(rightLight, green);
+    LedColor red = {255, 0, 0};
+    LedColor green = {0, 255, 0};
+
+    leftLight.on(red);
+    rightLight.on(green);
 }
 
 void disableLight()
 {
-    lightOff(leftLight);
-    lightOff(rightLight);
+    leftLight.off();
+    rightLight.off();
 }
 
 void blinkNavigationLights()
@@ -60,4 +86,14 @@ void blinkNavigationLights()
     delay(BLINK_DURATION);
     disableLight();
     delay(BLINK_DURATION);
+}
+
+void turnWarningLights()
+{
+    LedColor blue = {100, 100, 100};
+
+    leftLight.on(blue);
+    rightLight.on(blue);
+    delay(3000);
+    disableLight();
 }
