@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <movement.h>
 #include <led.h>
+#include <config_pins.h>
 
 class Motor
 {
@@ -17,8 +18,8 @@ public:
     void stop();
 };
 
-Motor leftEngine = Motor(LEFT_MOTOR_FORWARD, LEFT_MOTOR_BACKWARD);
-Motor rightEngine = Motor(RIGHT_MOTOR_FORWARD, RIGHT_MOTOR_BACKWARD);
+Motor leftEngine = Motor(LEFT_MOTOR_FORWARD_PIN, LEFT_MOTOR_BACKWARD_PIN);
+Motor rightEngine = Motor(RIGHT_MOTOR_FORWARD_PIN, RIGHT_MOTOR_BACKWARD_PIN);
 
 Motor::Motor(int _forward, int _backward)
 {

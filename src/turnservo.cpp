@@ -2,6 +2,7 @@
 #include <Servo.h>
 #include <Arduino.h>
 #include <turnservo.h>
+#include <config_pins.h>
 
 Servo servo;
 

@@ -50,7 +50,7 @@ void loop()
     delay(SONAR_DELAY);
     unsigned int distance = readDistanceAhead();
 
-    if (distance <= CRITICAL_DISTANCE)
+    if (distance <= MINIMAL_DISTANCE)
     {
       stop();
       switch (random(0, 3))
@@ -75,7 +75,7 @@ void loop()
 
       Serial.println("***SONAR: distance ahead: " + (String)distance + " distance <<left: " + (String)distanceLeft + " distance right>>: " + (String)distanceRight);
 
-      if (distanceRight <= CRITICAL_DISTANCE && distanceLeft <= CRITICAL_DISTANCE)
+      if (distanceRight <= MINIMAL_DISTANCE && distanceLeft <= MINIMAL_DISTANCE)
       {
         moveBackward(500);
         switch (random(0, 3))

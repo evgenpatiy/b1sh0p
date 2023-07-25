@@ -1,4 +1,5 @@
 #include <ultrasonic.h>
+#include <config_pins.h>
 #include <turnservo.h>
 #include <led.h>
 #include <robotside.h>
@@ -25,31 +26,4 @@ unsigned int readDistanceByAngle(unsigned int angle)
     digitalWrite(LED_BUILTIN, LOW);
 
     return readDistanceAhead();
-}
-
-unsigned int getSonarData(RobotSide side)
-{
-    int positions[SONAR_POINTS];
-
-    int sonarDataStepAngle = abs(SERVO_CENTER_POSITION - SERVO_RIGHT_POSITION) / SONAR_POINTS;
-    int angleSign;
-
-    if (side == leftSide)
-    {
-        angleSign = -1;
-    }
-    else
-    {
-        angleSign = 1;
-    }
-
-    SonarComplexData sonarData[SONAR_POINTS];
-    for (unsigned char i = 0; i <= SONAR_POINTS; i = i + 1)
-    {
-        int angle = i * sonarDataStepAngle * angleSign;
-        sonarData[i].angle = angle;
-        sonarData[i].distance = readDistanceByAngle(SERVO_CENTER_POSITION + angle);
-        Serial.println("--- sonar angle " + (String)sonarData[i].angle + " DISTANCE " + (String)sonarData[i].distance);
-    }
-
 }

@@ -1,8 +1,3 @@
-#define LEFT_MOTOR_FORWARD 3
-#define LEFT_MOTOR_BACKWARD 2
-#define RIGHT_MOTOR_FORWARD 5
-#define RIGHT_MOTOR_BACKWARD 4
-
 #define FULL_TURNOVER_TIME 500UL
 
 void initMotors();

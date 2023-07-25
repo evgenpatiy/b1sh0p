@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <led.h>
+#include <config_pins.h>
 
 struct LedColor
 {
@@ -51,8 +52,8 @@ void LedLight::off()
     digitalWrite(b_pin, LOW);
 }
 
-LedLight leftLight = LedLight(LEFT_LED_RED, LEFT_LED_GREEN, LEFT_LED_BLUE);
-LedLight rightLight = LedLight(RIGHT_LED_RED, RIGHT_LED_GREEN, RIGHT_LED_BLUE);
+LedLight leftLight = LedLight(LEFT_LED_RED_PIN, LEFT_LED_GREEN_PIN, LEFT_LED_BLUE_PIN);
+LedLight rightLight = LedLight(RIGHT_LED_RED_PIN, RIGHT_LED_GREEN_PIN, RIGHT_LED_BLUE_PIN);
 
 void initLedLights()
 {
