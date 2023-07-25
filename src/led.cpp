@@ -9,6 +9,10 @@ struct LedColor
     unsigned char bLevel;
 };
 
+LedColor red = {255, 0, 0};
+LedColor green = {0, 255, 0};
+LedColor blue = {100, 100, 100};
+
 class LedLight
 {
 private:
@@ -20,7 +24,7 @@ public:
     LedLight(unsigned char _r, unsigned char _g, unsigned char _b);
 
     void init();
-    void on(LedColor color);
+    void on(LedColor *color);
     void off();
 };
 
@@ -38,11 +42,11 @@ void LedLight::init()
     pinMode(b_pin, OUTPUT);
 }
 
-void LedLight::on(LedColor color)
+void LedLight::on(LedColor *color)
 {
-    analogWrite(r_pin, color.rLevel);
-    analogWrite(g_pin, color.gLevel);
-    analogWrite(b_pin, color.bLevel);
+    analogWrite(r_pin, color->rLevel);
+    analogWrite(g_pin, color->gLevel);
+    analogWrite(b_pin, color->bLevel);
 }
 
 void LedLight::off()
@@ -63,11 +67,8 @@ void initLedLights()
 
 void forwardLightsOn()
 {
-    LedColor red = {255, 0, 0};
-    LedColor green = {0, 255, 0};
-
-    leftLight.on(red);
-    rightLight.on(green);
+    leftLight.on(&red);
+    rightLight.on(&green);
 }
 
 void disableLight()
@@ -91,10 +92,8 @@ void blinkNavigationLights()
 
 void turnWarningLights()
 {
-    LedColor blue = {100, 100, 100};
-
-    leftLight.on(blue);
-    rightLight.on(blue);
+    leftLight.on(&blue);
+    rightLight.on(&blue);
     delay(3000);
     disableLight();
 }

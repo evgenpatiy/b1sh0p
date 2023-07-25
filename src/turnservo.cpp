@@ -20,11 +20,5 @@ void resetServoPosition()
 void initServo()
 {
     servo.attach(SERVO_MOTOR_PIN);
-
-    turnToAngle(SERVO_LEFT_POSITION);
-    delay(1000);
-    turnToAngle(SERVO_RIGHT_POSITION);
-    delay(1000);
-
     resetServoPosition();
 }
