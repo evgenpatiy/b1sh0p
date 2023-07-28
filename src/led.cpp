@@ -65,12 +65,6 @@ void initLedLights()
     rightLight.init();
 }
 
-void forwardLightsOn()
-{
-    leftLight.on(&red);
-    rightLight.on(&green);
-}
-
 void disableLight()
 {
     leftLight.off();
@@ -79,13 +73,17 @@ void disableLight()
 
 void blinkNavigationLights()
 {
-    forwardLightsOn();
+    leftLight.on(&red);
+    rightLight.on(&green);
     delay(BLINK_DURATION);
+
     disableLight();
     delay(BLINK_DURATION);
 
-    forwardLightsOn();
+    leftLight.on(&red);
+    rightLight.on(&green);
     delay(BLINK_DURATION);
+
     disableLight();
     delay(BLINK_DURATION);
 }

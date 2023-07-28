@@ -53,21 +53,7 @@ void loop()
     if (distance <= MINIMAL_DISTANCE)
     {
       stop();
-      switch (random(0, 3))
-        {
-        case 0:
-          turnOverLeft();
-          break;
-        case 1:
-          turnOverRight();
-          break;
-        case 2:
-          moveBackward(400);
-          break;
-        default:
-          break;
-        }
-
+      
       int distanceRight = readDistanceByAngle(SERVO_RIGHT_POSITION);
       resetServoPosition();
       
@@ -79,16 +65,13 @@ void loop()
       if (distanceRight <= MINIMAL_DISTANCE && distanceLeft <= MINIMAL_DISTANCE)
       {
         moveBackward(500);
-        switch (random(0, 3))
+        switch (random(0, 2))
         {
         case 0:
           turnOverLeft();
           break;
         case 1:
           turnOverRight();
-          break;
-        case 2:
-          moveBackward(400);
           break;
         default:
           break;
@@ -111,7 +94,7 @@ void loop()
           break;
         }
       }
-      else if (distanceLeft >= distanceRight)
+      else if (distanceLeft > distanceRight)
       {
         switch (random(0, 3))
         {
@@ -123,23 +106,6 @@ void loop()
           break;
         case 2:
           turnLeftToAngle(150);
-          break;
-        default:
-          break;
-        }
-      }
-      else
-      {
-        switch (random(0, 3))
-        {
-        case 0:
-          turnOverLeft();
-          break;
-        case 1:
-          turnOverRight();
-          break;
-        case 2:
-          moveBackward(500);
           break;
         default:
           break;
