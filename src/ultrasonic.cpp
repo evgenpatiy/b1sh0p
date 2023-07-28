@@ -20,10 +20,5 @@ unsigned int readDistanceAhead()
 unsigned int readDistanceByAngle(unsigned int angle)
 {
     turnToAngle(angle);
-
-    digitalWrite(LED_BUILTIN, HIGH);
-    delay(SONAR_DELAY);
-    digitalWrite(LED_BUILTIN, LOW);
-
     return readDistanceAhead();
 }

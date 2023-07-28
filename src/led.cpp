@@ -4,9 +4,9 @@
 
 struct LedColor
 {
-    unsigned char rLevel;
-    unsigned char gLevel;
-    unsigned char bLevel;
+    unsigned char r_level;
+    unsigned char g_level;
+    unsigned char b_level;
 };
 
 LedColor red = {255, 0, 0};
@@ -21,18 +21,18 @@ private:
     unsigned char b_pin;
 
 public:
-    LedLight(unsigned char _r, unsigned char _g, unsigned char _b);
+    LedLight(unsigned char _r_pin, unsigned char _g_pin, unsigned char _b_pin);
 
     void init();
     void on(LedColor *color);
     void off();
 };
 
-LedLight::LedLight(unsigned char _r, unsigned char _g, unsigned char _b)
+LedLight::LedLight(unsigned char _r_pin, unsigned char _g_pin, unsigned char _b_pin)
 {
-    r_pin = _r;
-    g_pin = _g;
-    b_pin = _b;
+    r_pin = _r_pin;
+    g_pin = _g_pin;
+    b_pin = _b_pin;
 }
 
 void LedLight::init()
@@ -44,9 +44,9 @@ void LedLight::init()
 
 void LedLight::on(LedColor *color)
 {
-    analogWrite(r_pin, color->rLevel);
-    analogWrite(g_pin, color->gLevel);
-    analogWrite(b_pin, color->bLevel);
+    analogWrite(r_pin, color->r_level);
+    analogWrite(g_pin, color->g_level);
+    analogWrite(b_pin, color->b_level);
 }
 
 void LedLight::off()

@@ -10,7 +10,7 @@ private:
     int backward_pin;
 
 public:
-    Motor(int _forward, int _backward);
+    Motor(int _forward_pin, int _backward_pin);
 
     void init();
     void moveForward();
@@ -18,13 +18,13 @@ public:
     void stop();
 };
 
-Motor leftEngine = Motor(LEFT_MOTOR_FORWARD_PIN, LEFT_MOTOR_BACKWARD_PIN);
-Motor rightEngine = Motor(RIGHT_MOTOR_FORWARD_PIN, RIGHT_MOTOR_BACKWARD_PIN);
+Motor leftMotor = Motor(LEFT_MOTOR_FORWARD_PIN, LEFT_MOTOR_BACKWARD_PIN);
+Motor rightMotor = Motor(RIGHT_MOTOR_FORWARD_PIN, RIGHT_MOTOR_BACKWARD_PIN);
 
-Motor::Motor(int _forward, int _backward)
+Motor::Motor(int _forward_pin, int _backward_pin)
 {
-    forward_pin = _forward;
-    backward_pin = _backward;
+    forward_pin = _forward_pin;
+    backward_pin = _backward_pin;
 }
 
 void Motor::init()
@@ -53,14 +53,16 @@ void Motor::stop()
 
 void initMotors()
 {
-    leftEngine.init();
-    rightEngine.init();
+    leftMotor.init();
+    rightMotor.init();
 }
 
 void stop()
 {
-    leftEngine.stop();
-    rightEngine.stop();
+    digitalWrite(LED_BUILTIN, LOW);
+
+    leftMotor.stop();
+    rightMotor.stop();
 }
 
 void execute(unsigned int time)
@@ -74,29 +76,31 @@ void execute(unsigned int time)
 
 void moveForward(unsigned int time)
 {
-    leftEngine.moveForward();
-    rightEngine.moveForward();
+    digitalWrite(LED_BUILTIN, HIGH);
+
+    leftMotor.moveForward();
+    rightMotor.moveForward();
     execute(time);
 }
 
 void moveBackward(unsigned int time)
 {
-    leftEngine.moveBackward();
-    rightEngine.moveBackward();
+    leftMotor.moveBackward();
+    rightMotor.moveBackward();
     execute(time);
 }
 
 void turnLeft(unsigned int time)
 {
-    leftEngine.moveBackward();
-    rightEngine.moveForward();
+    leftMotor.moveBackward();
+    rightMotor.moveForward();
     execute(time);
 }
 
 void turnRight(unsigned int time)
 {
-    leftEngine.moveForward();
-    rightEngine.moveBackward();
+    leftMotor.moveForward();
+    rightMotor.moveBackward();
     execute(time);
 }
 

@@ -3,17 +3,10 @@
 #include <led.h>
 #include <turnservo.h>
 #include <ultrasonic.h>
+#include <debug.h>
+#include <name.h>
 
 #define RUN_LOOP true
-#define DEBUG true
-
-#define SERIAL_PORT_SPEED 9600
-#define Serial \
-  if (DEBUG)   \
-  Serial
-
-const char *ROBOT_NAME = {"B1sh0p"};
-const char *ROBOT_SOFTWARE_VERSION = {"0.04"};
 
 unsigned long operatedTime = 0;
 
