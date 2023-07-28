@@ -5,22 +5,22 @@
 #include <ultrasonic.h>
 
 #define RUN_LOOP true
+#define DEBUG true
 
 #define SERIAL_PORT_SPEED 9600
-#define DEBUG true
 #define Serial \
   if (DEBUG)   \
   Serial
 
 const char *ROBOT_NAME = {"B1sh0p"};
-const float ROBOT_SOFTWARE_VERSION = 0.04;
+const char *ROBOT_SOFTWARE_VERSION = {"0.04"};
 
 unsigned long operatedTime = 0;
 
 void initSerialConsole()
 {
   Serial.begin(SERIAL_PORT_SPEED);
-  Serial.println(">>> WEYLAND-YUTANI");
+  Serial.println(F(">>> WEYLAND-YUTANI"));
   Serial.println("--- this is " + (String)ROBOT_NAME + " version " + (String)ROBOT_SOFTWARE_VERSION);
   Serial.println("--- init serial console... speed: " + (String)SERIAL_PORT_SPEED);
   Serial.println();
@@ -70,6 +70,7 @@ void loop()
 
       int distanceRight = readDistanceByAngle(SERVO_RIGHT_POSITION);
       resetServoPosition();
+      
       int distanceLeft = readDistanceByAngle(SERVO_LEFT_POSITION);
       resetServoPosition();
 

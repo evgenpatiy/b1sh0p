@@ -5,15 +5,6 @@
 #define MAXIMUM_DISTANCE 400
 #define MINIMAL_DISTANCE 30
 
-#ifndef SONAR_COMPLEX_DATA_H
-#define SONAR_COMPLEX_DATA_H
-struct SonarComplexData
-{
-  int angle;
-  int distance;
-};
-#endif
-
 unsigned int readDistanceAhead();
 
 unsigned int readDistanceByAngle(unsigned int angle);
