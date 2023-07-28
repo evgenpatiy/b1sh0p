@@ -53,14 +53,12 @@ void loop()
     if (distance <= MINIMAL_DISTANCE)
     {
       stop();
-      
+
       int distanceRight = readDistanceByAngle(SERVO_RIGHT_POSITION);
       resetServoPosition();
-      
+
       int distanceLeft = readDistanceByAngle(SERVO_LEFT_POSITION);
       resetServoPosition();
-
-      Serial.println("***SONAR: distance ahead: " + (String)distance + " distance <<left: " + (String)distanceLeft + " distance right>>: " + (String)distanceRight);
 
       if (distanceRight <= MINIMAL_DISTANCE && distanceLeft <= MINIMAL_DISTANCE)
       {
