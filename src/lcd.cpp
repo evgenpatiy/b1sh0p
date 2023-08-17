@@ -9,9 +9,19 @@ void initLCD()
 {
     lcd.init();
     lcd.backlight();
-    lcd.print(VENDOR_NAME);
-    lcd.setCursor(0, 1);
-    lcd.print(ROBOT_NAME);
-    lcd.setCursor(strlen(ROBOT_NAME) + 1, 1);
-    lcd.print(ROBOT_SOFTWARE_VERSION);
+
+    displayLCDMessage(0, 0, VENDOR_NAME);
+    displayLCDMessage(0, 1, ROBOT_NAME);
+    displayLCDMessage(strlen(ROBOT_NAME) + 1, 1, ROBOT_SOFTWARE_VERSION);
+}
+
+void clearRow(unsigned int row)
+{
+    displayLCDMessage(0, row, "                    ");
+}
+
+void displayLCDMessage(unsigned int col, unsigned int row, const char *message)
+{
+    lcd.setCursor(col, row);
+    lcd.print(message);
 }

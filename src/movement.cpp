@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <movement.h>
 #include <led.h>
+#include <lcd.h>
 #include <config_pins.h>
 
 class Motor
@@ -61,6 +62,9 @@ void stop()
 {
     digitalWrite(LED_BUILTIN, LOW);
 
+    clearRow(2);
+    displayLCDMessage(0, 2, "STOP");
+
     leftMotor.stop();
     rightMotor.stop();
 }
@@ -77,6 +81,8 @@ void execute(unsigned int time)
 void moveForward(unsigned int time)
 {
     digitalWrite(LED_BUILTIN, HIGH);
+    clearRow(2);
+    displayLCDMessage(0, 2, "move FORWARD");
 
     leftMotor.moveForward();
     rightMotor.moveForward();
@@ -85,6 +91,8 @@ void moveForward(unsigned int time)
 
 void moveBackward(unsigned int time)
 {
+    clearRow(2);
+    displayLCDMessage(0, 2, "move BACKWARD");
     leftMotor.moveBackward();
     rightMotor.moveBackward();
     execute(time);
