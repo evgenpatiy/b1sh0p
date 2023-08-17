@@ -4,29 +4,24 @@
 #include <turnservo.h>
 #include <ultrasonic.h>
 #include <debug.h>
-#include <name.h>
+#include <lcd.h>
 
-#define RUN_LOOP true
+#define RUN_LOOP false
 
 unsigned long operatedTime = 0;
 
 void initSerialConsole()
 {
   Serial.begin(SERIAL_PORT_SPEED);
-  Serial.println(F(">>> WEYLAND-YUTANI"));
-  Serial.println("--- this is " + (String)ROBOT_NAME + " version " + (String)ROBOT_SOFTWARE_VERSION);
-  Serial.println("--- init serial console... speed: " + (String)SERIAL_PORT_SPEED);
-  Serial.println();
 }
 
 void setup()
 {
   initSerialConsole();
+  initLCD();
   initMotors();
   initLedLights();
   initServo();
-
-  turnWarningLights();
 }
 
 void loop()
