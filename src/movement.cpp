@@ -19,8 +19,11 @@ public:
     void stop();
 };
 
-Motor leftMotor = Motor(LEFT_MOTOR_FORWARD_PIN, LEFT_MOTOR_BACKWARD_PIN);
-Motor rightMotor = Motor(RIGHT_MOTOR_FORWARD_PIN, RIGHT_MOTOR_BACKWARD_PIN);
+Motor LF_Motor = Motor(LF_MOTOR_FORWARD_PIN, LF_MOTOR_BACKWARD_PIN);
+Motor RF_Motor = Motor(RF_MOTOR_FORWARD_PIN, RF_MOTOR_BACKWARD_PIN);
+
+Motor LB_Motor = Motor(LB_MOTOR_FORWARD_PIN, LB_MOTOR_BACKWARD_PIN);
+Motor RB_Motor = Motor(RB_MOTOR_FORWARD_PIN, RB_MOTOR_BACKWARD_PIN);
 
 Motor::Motor(int _forward_pin, int _backward_pin)
 {
@@ -54,8 +57,11 @@ void Motor::stop()
 
 void initMotors()
 {
-    leftMotor.init();
-    rightMotor.init();
+    LF_Motor.init();
+    RF_Motor.init();
+
+    LB_Motor.init();
+    RB_Motor.init();
 }
 
 void stop()
@@ -65,8 +71,11 @@ void stop()
     clearRow(2);
     displayLCDMessage(0, 2, "STOP");
 
-    leftMotor.stop();
-    rightMotor.stop();
+    LF_Motor.stop();
+    RF_Motor.stop();
+
+    LB_Motor.stop();
+    RB_Motor.stop();
 }
 
 void execute(unsigned int time)
@@ -84,8 +93,12 @@ void moveForward(unsigned int time)
     clearRow(2);
     displayLCDMessage(0, 2, "move FORWARD");
 
-    leftMotor.moveForward();
-    rightMotor.moveForward();
+    LF_Motor.moveForward();
+    RF_Motor.moveForward();
+
+    LB_Motor.moveForward();
+    RB_Motor.moveForward();
+
     execute(time);
 }
 
@@ -93,22 +106,35 @@ void moveBackward(unsigned int time)
 {
     clearRow(2);
     displayLCDMessage(0, 2, "move BACKWARD");
-    leftMotor.moveBackward();
-    rightMotor.moveBackward();
+
+    LF_Motor.moveBackward();
+    RF_Motor.moveBackward();
+
+    LB_Motor.moveBackward();
+    RB_Motor.moveBackward();
+
     execute(time);
 }
 
 void turnLeft(unsigned int time)
 {
-    leftMotor.moveBackward();
-    rightMotor.moveForward();
+    LF_Motor.moveBackward();
+    RF_Motor.moveForward();
+
+    LB_Motor.moveBackward();
+    RB_Motor.moveForward();
+
     execute(time);
 }
 
 void turnRight(unsigned int time)
 {
-    leftMotor.moveForward();
-    rightMotor.moveBackward();
+    LF_Motor.moveForward();
+    RF_Motor.moveBackward();
+
+    LB_Motor.moveForward();
+    RB_Motor.moveBackward();
+
     execute(time);
 }
 

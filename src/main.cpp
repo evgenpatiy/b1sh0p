@@ -6,7 +6,7 @@
 #include <debug.h>
 #include <lcd.h>
 
-#define RUN_LOOP true
+#define RUN_LOOP false
 
 unsigned long operatedTime = 0;
 
@@ -20,8 +20,8 @@ void setup()
   initSerialConsole();
   initLCD();
   initMotors();
-  initLedLights();
-  initServo();
+ // initLedLights();
+ // initServo();
 }
 
 void loop()

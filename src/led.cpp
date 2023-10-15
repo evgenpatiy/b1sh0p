@@ -56,8 +56,8 @@ void LedLight::off()
    // digitalWrite(b_pin, LOW);
 }
 
-LedLight leftLight = LedLight(LEFT_LED_RED_PIN, LEFT_LED_GREEN_PIN, 1111);
-LedLight rightLight = LedLight(RIGHT_LED_RED_PIN, RIGHT_LED_GREEN_PIN, 1111);
+LedLight leftLight = LedLight(111, 1111, 1111);
+LedLight rightLight = LedLight(1111, 111, 1111);
 
 void initLedLights()
 {
