@@ -25,4 +25,4 @@
 //#define LEFT_LED_GREEN_PIN 5
 //#define LEFT_LED_BLUE_PIN 11
 
-#define SERVO_MOTOR_PIN 8
+#define SERVO_MOTOR_PIN 13
